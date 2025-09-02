@@ -12,12 +12,12 @@ PKG_NAME:=curl
 PKG_VERSION:=8.15.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/curl/curl/releases/download/curl-$(subst .,_,$(PKG_VERSION))/ \
 	https://dl.uxnr.de/mirror/curl/ \
 	https://curl.askapache.com/download/ \
 	https://curl.se/download/
-PKG_HASH:=699a6d2192322792c88088576cff5fe188452e6ea71e82ca74409f07ecc62563
+PKG_HASH:=6cd0a8a5b126ddfda61c94dc2c3fc53481ba7a35461cf7c5ab66aa9d6775b609
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
