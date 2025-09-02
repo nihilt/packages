@@ -10,12 +10,12 @@ PKG_HASH:=27d084518f06d78279b050cc9cdff2418f80fb753da019427ce853cec920f33f
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
-PKG_MAINTAINER:=Aleksey Vasilenko <aleksey.vasilenko@gmail.com>
+PKG_MAINTAINER:=sbwml <admin@cooluc.com>
 
-CMAKE_INSTALL:=1
+PKG_FIXUP:=autoreconf
+PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/cmake.mk
 
 define Package/libnghttp3
   SECTION:=libs
@@ -25,20 +25,22 @@ define Package/libnghttp3
 endef
 
 define Package/libnghttp3/description
-HTTP/3 library written in C.
+ nghttp3 is a thin HTTP/3 layer over an underlying QUIC stack.
 endef
 
-CMAKE_OPTIONS += -DENABLE_LIB_ONLY=ON
+CONFIGURE_ARGS += --enable-lib-only
 
 define Build/InstallDev
-	$(call Build/InstallDev/cmake,$(1))
-	$(SED) 's,/usr/include,$$$${prefix}/include,g' $(1)/usr/lib/pkgconfig/libnghttp3.pc
-	$(SED) 's,/usr/lib,$$$${exec_prefix}/lib,g' $(1)/usr/lib/pkgconfig/libnghttp3.pc
+	$(INSTALL_DIR) $(1)/usr/include/nghttp3
+	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/include/nghttp3/*.h $(1)/usr/include/nghttp3/
+	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
+	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/*.pc $(1)/usr/lib/pkgconfig/
+	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libnghttp3.so* $(1)/usr/lib/
 endef
 
 define Package/libnghttp3/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libnghttp3.so* $(1)/usr/lib
+	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libnghttp3.so* $(1)/usr/lib
 endef
 
 $(eval $(call BuildPackage,libnghttp3))
