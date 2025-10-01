@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fluent-bit
-PKG_VERSION:=3.1.9
+PKG_VERSION:=4.1.0
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/fluent/fluent-bit.git
 PKG_SOURCE_VERSION=v$(PKG_VERSION)
-PKG_MIRROR_HASH:=cb81f94e4d4b1cb88dee06f9534efbb7fdc92a24d950cab7ccbd1a01d89bf908
+PKG_MIRROR_HASH:=37c8e452cb2b492eb364bad350ebe2675e413e1bf83e8ca3e4607ade1084fb71
 
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
@@ -20,7 +20,7 @@ define Package/fluent-bit
   CATEGORY:=Administration
   TITLE:=Fast and Lightweight Logs and Metrics processor
   URL:=https://fluentbit.io/
-  DEPENDS:= +libyaml +libopenssl +libcurl +libatomic +musl-fts +flex +bison
+  DEPENDS:= +libyaml +libopenssl +libcurl +libstdcpp +libatomic +musl-fts +flex +bison
 endef
 
 define Package/fluent-bit/description
